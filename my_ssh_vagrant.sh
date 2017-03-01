@@ -18,7 +18,7 @@ generate_key_pair(){
   local local_key_path="${salt_conf_dir}/${key_name}"
   local local_public_key_path="${salt_conf_dir}/${key_name}.pub"
   echo "generating key-pair"
-  if [ ! -f /tmp/foo.txt ]; then
+  if [ ! -f $local_key_path ]; then
     ssh-keygen -t rsa -N "" -f ${local_key_path}
   else
     echo "key at ${local_key_path} already exists, skipping"
