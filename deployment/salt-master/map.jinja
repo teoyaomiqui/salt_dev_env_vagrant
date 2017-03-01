@@ -1,0 +1,7 @@
+{% set master = salt['grains.filter_by']({
+  'Debian': { 
+    'pkg_name': 'salt-master' 
+    }
+  },
+  default = { 'pkg_name': 'salt-master' }
+%}

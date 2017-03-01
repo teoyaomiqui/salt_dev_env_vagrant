@@ -1,0 +1,21 @@
+saltification:
+  minion-1:
+    ssh_username: vagrant
+    ssh_host: 192.168.121.166
+    key_filename: /etc/salt/id_rsa
+  minion-2:
+    ssh_username: vagrant
+    ssh_host: 192.168.121.85
+    key_filename: /etc/salt/id_rsa
+  minion-3:
+    ssh_username: vagrant
+    ssh_host: 192.168.121.20
+    key_filename: /etc/salt/id_rsa
+  minion-4:
+    ssh_username: vagrant
+    ssh_host: 192.168.121.222
+    key_filename: /etc/salt/id_rsa
+  minion-5:
+    ssh_username: vagrant
+    ssh_host: 192.168.121.183
+    key_filename: /etc/salt/id_rsa

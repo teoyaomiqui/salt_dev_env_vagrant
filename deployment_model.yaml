@@ -1,0 +1,10 @@
+---
+deployment_model:
+  roles:
+    - salt-master
+    - salt-minion  
+  master_nodes: 1
+  minion_nodes: 5
+  master_ram: 2048
+  minion_ram: 3072
+  base_ip_net: '192.168.90'

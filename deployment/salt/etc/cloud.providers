@@ -1,0 +1,4 @@
+saltify-config:
+  minion:
+    master: 192.168.90.1
+  provider: saltify
