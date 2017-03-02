@@ -14,6 +14,7 @@ generate_key_pair(){
   local result=$1
   local local_key_path="${salt_conf_dir}/${key_name}"
   local local_public_key_path="${salt_conf_dir}/${key_name}.pub"
+
   echo "generating key-pair"
   if [ ! -f $local_key_path ]; then
     ssh-keygen -t rsa -N "" -f ${local_key_path}
@@ -32,6 +33,7 @@ parse_and_deploy_keys() {
   echo "saltification:" > $map_file_path
   echo "starting to distribute ssh_keys, minions are: \\n $minions"
   local minions=$(vagrant status | awk '/running/ {print $1}')
+
   for minion in $minions; do
     echo "distributing key to minion: $minion"
     ssh_conf=$(vagrant ssh-config "${minion}")
@@ -45,6 +47,7 @@ parse_and_deploy_keys() {
     echo "${prefix}${prefix}ssh_host: $hname" >> $map_file_path
     echo "${prefix}${prefix}key_filename: $key_file_path">> $map_file_path
   done
+
   echo "setting minion connfiguration for salification"
   sed -i "s/<master_ip_address>/${SALT_MASTER_IP}/" deployment/salt/etc/cloud.providers
 
