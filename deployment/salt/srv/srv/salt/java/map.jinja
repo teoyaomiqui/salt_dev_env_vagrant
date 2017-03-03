@@ -1,0 +1,21 @@
+{% set architecture = 'amd64' %}
+{% set java = salt['grains.filter_by']({
+    'Debian': {}
+    }, merge=salt['grains.filter_by']({
+        'xenial': {
+            'jdk': {
+                'package': 'openjdk-8-jdk',
+                'alternative': 'java-1.8.0-openjdk-' + architecture,
+                'alternative_path': '/usr/lib/jvm/java-1.8.0-openjdk-' + architecture + '/bin/java',
+                'java_home': '/usr/lib/jvm/java-1.8.0-openjdk-' + architecture,
+                'version': 'latest'
+            },
+            'jre': {
+                'package': 'openjdk-8-jre-headless',
+                'alternative': 'java-1.8.0-openjdk-' + architecture,
+                'alternative_path': '/usr/lib/jvm/java-1.8.0-openjdk-' + architecture + '/bin/java',
+                'java_home': '/usr/lib/jvm/java-1.8.0-openjdk-' + architecture,
+                'version': 'latest'
+            }
+        }
+    }, grain='oscodename', merge=salt['pillar.get']('java:lookup'))) %}

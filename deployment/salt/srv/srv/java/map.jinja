@@ -1,0 +1,12 @@
+{% set architecture = salt['grains.get']('cpuarch') %}
+{% set java = salt['grains.filter_by']({
+    'Debian': {}
+    }, merge=salt['grains.filter_by']({
+        'xenial': {
+            'jdk': {
+                'package': 'openjdk-8-jdk',
+                'alternative': "java-1.8.0-openjdk-"
+            }
+        }
+    }, grain='oscodename')) %}
+
