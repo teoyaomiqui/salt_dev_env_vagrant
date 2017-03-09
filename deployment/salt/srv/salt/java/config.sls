@@ -16,9 +16,14 @@ config_java_home:
     - repl: {{ 'JAVA_HOME=' + java[distribution]['java_home'] }}
     - pattern: '^JAVA_HOME=.*$'
     - prepend_if_not_found: True
+
+  grains.present:
+    - force: True
+    - name: java_home
+    - value: {{ java[distribution]['java_home'] }}
 {% endif %}
 
-{% if salt['pillar.get']('use_alternatives', False) %}
+{% if salt['pillar.get']('use_alternatives', True) %}
 set_java_alternatives:
   cmd.run:
     - name: {{ ['update-java-alternatives', '--set', java[distribution]['alternative'], jre_flag]|join(' ') }}

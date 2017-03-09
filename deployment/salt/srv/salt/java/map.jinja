@@ -1,4 +1,9 @@
-{% set architecture = salt['grains.get']('cpuarch') %}
+{% set architecture = salt['grains.filter_by']({
+    'Debian': salt['grains.filter_by']({
+        'x86_64': 'amd64',
+        'grain_arch': salt['grains.get']('cpuarch')
+    }, default='grain_arch', grain='cpuarch')}) %}
+
 {% set java = salt['grains.filter_by']({
     'Debian': {}
     }, merge=salt['grains.filter_by']({
@@ -18,15 +23,4 @@
                 'version': 'latest'
             }
         }
-    }, grain='oscodename', merge=salt['grains.filter_by']( {
-        'x86_64': {
-            'jdk': {
-                'java_home': '/usr/lib/jvm/java-1.8.0-openjdk-amd64',
-                'alternative_path': '/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java'
-            },
-            'jre': {
-                'alternative_path': '/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java',
-                'java_home': '/usr/lib/jvm/java-1.8.0-openjdk-amd64',
-            }
-        }
-    }, grain='cpuarch', merge=salt['pillar.get']('java:lookup')))) %}
+    }, grain='oscodename', merge=salt['pillar.get']('java:lookup'))) %}
