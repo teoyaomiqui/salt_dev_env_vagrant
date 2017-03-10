@@ -1,0 +1,8 @@
+{% set maven = {
+    'java_home': salt['grains.get']('java_home', '/usr/lib/java'),
+    'install_method': salt['pillar.get']('maven:lookup.install_method', 'from_archive'),
+    'install_options': salt['pillar.get']('maven:lookup:install_options', {
+        'version': '3.3.9'
+        })
+    }
+%}

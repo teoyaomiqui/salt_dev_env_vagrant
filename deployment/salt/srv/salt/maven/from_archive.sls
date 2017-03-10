@@ -1,4 +1,4 @@
-{% from 'maven/map.jinja' import maven with context %}
+{% from 'maven/settings.jinja' import maven with context %}
 
 deploy_maven:
   archive.extracted:
